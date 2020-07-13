@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Cepoj8pCmbEqSHoG1f290X3ocb88EDzWW670Kcuhc5fDdV01nAsxRwkD/3JWPLiklVEfPll6rHQuooU5woy7tA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\manji\\OneDrive\\Documentos\\SocialMedia\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\manji\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\manji\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
