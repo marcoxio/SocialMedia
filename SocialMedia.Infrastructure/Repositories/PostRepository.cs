@@ -31,7 +31,7 @@ namespace SocialMedia.Infrastructure.Repositories
         //     return posts;
         // }
 
-        public async Task<IEnumerable<Publicacion>> GetPosts()
+        public async Task<IEnumerable<Post>> GetPosts()
         {
             // var posts = Enumerable.Range(1,10).Select(x => new Post
             // {
@@ -42,8 +42,14 @@ namespace SocialMedia.Infrastructure.Repositories
             //     UserId = x * 2
             // });
             // await Task.Delay(10);
-            var posts = await _context.Publicacion.ToListAsync();
+            var posts = await _context.Posts.ToListAsync();
             return posts;
+        }
+
+        public async Task<Post> GetPost(int id)
+        {
+            var post = await _context.Posts.FirstOrDefaultAsync(x => x.PostId == id);
+            return post;
         }
     }
 }

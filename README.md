@@ -11,3 +11,9 @@
 # Model Database First(Scaffolding)
 Use un layer Infrastructure
 `dotnet ef dbcontext scaffold "Server=localhost\SQLEXPRESS;Database=SocialMedia;Integrated Security = true;" Microsoft.EntityFrameworkCore.SqlServer -o Data`
+
+
+# How To Use
+
+## Posts
+``
