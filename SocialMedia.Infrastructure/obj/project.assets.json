@@ -1291,7 +1291,7 @@
           "bin/placeholder/SocialMedia.Core.dll": {}
         },
         "frameworkReferences": [
-          "Microsft.AspNetCore.App"
+          "Microsoft.AspNetCore.App"
         ]
       }
     }
@@ -5079,7 +5079,7 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsft.AspNetCore.App": {
+          "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
           },
           "Microsoft.NETCore.App": {

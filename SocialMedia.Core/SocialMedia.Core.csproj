@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
  <ItemGroup>
-    <FrameworkReference Include="Microsft.AspNetCore.App" /> 
+    <FrameworkReference Include="Microsoft.AspNetCore.App" /> 
   </ItemGroup>
    <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
