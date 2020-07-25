@@ -20519,6 +20519,12 @@
     "CSharpLanguageVersion": 800
   },
   "RootNamespace": "SocialMedia.Api",
-  "Documents": [],
+  "Documents": [
+    {
+      "FilePath": "c:\\Users\\manji\\OneDrive\\Documentos\\SocialMedia\\SocialMedia.Api\\Views\\Post\\GetPosts.cshtml",
+      "TargetPath": "Views\\Post\\GetPosts.cshtml",
+      "FileKind": "mvc"
+    }
+  ],
   "SerializationFormat": "0.2"
 }

@@ -64,3 +64,13 @@ C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\bin\Debug\netcore
 C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\bin\Debug\netcoreapp3.1\FluentValidation.AspNetCore.dll
 C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\bin\Debug\netcoreapp3.1\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\SocialMedia.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\bin\Debug\netcoreapp3.1\SocialMedia.Api.Views.dll
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\bin\Debug\netcoreapp3.1\SocialMedia.Api.Views.pdb
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\SocialMedia.Api.RazorAssemblyInfo.cache
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\SocialMedia.Api.RazorAssemblyInfo.cs
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\SocialMedia.Api.TagHelpers.input.cache
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\SocialMedia.Api.TagHelpers.output.cache
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\SocialMedia.Api.RazorCoreGenerate.cache
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\Razor\Views\Post\GetPosts.cshtml.g.cs
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\SocialMedia.Api.RazorTargetAssemblyInfo.cs
+C:\Users\manji\OneDrive\Documentos\SocialMedia\SocialMedia.Api\obj\Debug\netcoreapp3.1\SocialMedia.Api.Views.pdb
