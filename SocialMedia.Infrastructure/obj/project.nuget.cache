@@ -1,9 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "8g0RL1KmFjcThj/DOJz7EgS65/Z3su8Ip/ynWVdveur6/a6s2Mb4UAeWPx2UHya8kjiY0A+HYeNuEbkYAGI+hw==",
+  "dgSpecHash": "nGnAnKl0GJNZWv6H6Jo/xHgYEWxX301mnTt8QcuVXtWmyTUFZGcWBZ6luVAzrjJPD+1Gs1RLZj9D/cpJwbBSCA==",
   "success": true,
   "projectFilePath": "C:\\Users\\manji\\OneDrive\\Documentos\\SocialMedia\\SocialMedia.Infrastructure\\SocialMedia.Infrastructure.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\manji\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
+    "C:\\Users\\manji\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\manji\\.nuget\\packages\\fluentvalidation\\8.6.2\\fluentvalidation.8.6.2.nupkg.sha512",
+    "C:\\Users\\manji\\.nuget\\packages\\fluentvalidation.aspnetcore\\8.6.2\\fluentvalidation.aspnetcore.8.6.2.nupkg.sha512",
+    "C:\\Users\\manji\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\8.6.2\\fluentvalidation.dependencyinjectionextensions.8.6.2.nupkg.sha512",
     "C:\\Users\\manji\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\manji\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\manji\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
