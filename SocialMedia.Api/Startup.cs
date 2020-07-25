@@ -65,11 +65,12 @@ namespace SocialMedia.Api
             #endregion
 
 
+            //Dont Need Use this section
             //Filter Global Validation Model
-            services.AddMvc(options =>
-            {
-                options.Filters.Add<ValidationFilter>();
-            });
+            // services.AddMvc(options =>
+            // {
+            //     options.Filters.Add<ValidationFilter>();
+            // });
 
          
         }

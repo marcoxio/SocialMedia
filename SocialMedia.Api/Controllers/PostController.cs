@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SocialMedia.Api.Responses;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
@@ -27,6 +28,7 @@ namespace SocialMedia.Api.Controllers
         {
             var posts = await _postRepository.GetPosts();
             var postsDto = _mapper.Map<IEnumerable<PostDto>>(posts);
+            var response = new ApiResponse<IEnumerable<PostDto>>(postsDto);
             // var postsDto = posts.Select(x => new PostDto
             // {
             //     PostId = x.PostId,
@@ -35,7 +37,7 @@ namespace SocialMedia.Api.Controllers
             //     Image = x.Image,
             //     UserId = x.UserId
             // });
-            return Ok(postsDto);
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
@@ -43,6 +45,7 @@ namespace SocialMedia.Api.Controllers
         {
             var post = await _postRepository.GetPost(id);
             var postDto = _mapper.Map<PostDto>(post);
+            var response = new ApiResponse<PostDto>(postDto);
             // var postDto = new PostDto
             // {
             //     PostId = post.PostId,
@@ -51,7 +54,7 @@ namespace SocialMedia.Api.Controllers
             //     Image = post.Image,
             //     UserId = post.UserId
             // };
-            return Ok(postDto);
+            return Ok(response);
         }
 
         [HttpPost]
@@ -66,7 +69,35 @@ namespace SocialMedia.Api.Controllers
             //     UserId = postDto.UserId
             // };
             await _postRepository.CreatePost(post);
-            return Ok(post);
+
+            postDto = _mapper.Map<PostDto>(post);
+            var response = new ApiResponse<PostDto>(postDto);
+            return Ok(response);
+
+        }
+
+
+        [HttpPut]
+          public async Task<IActionResult> EditPost(int id, PostDto postDto)
+        {
+
+            var post = _mapper.Map<Post>(postDto);
+            post.PostId = id;
+        
+            var result = await _postRepository.UpdatePost(post);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+
+        }
+
+          [HttpDelete("{id}")]
+          public async Task<IActionResult> DeletePost(int id)
+        {
+            
+            var result = await _postRepository.DeletePost(id);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+
         }
     }
 }
