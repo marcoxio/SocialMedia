@@ -82,7 +82,7 @@ namespace SocialMedia.Api.Controllers
         {
 
             var post = _mapper.Map<Post>(postDto);
-            post.PostId = id;
+            post.Id = id;
         
             var result = await _postService.UpdatePost(post);
             var response = new ApiResponse<bool>(result);

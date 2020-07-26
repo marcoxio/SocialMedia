@@ -63,8 +63,12 @@ namespace SocialMedia.Api
             
             #region Dependency Injection
                 services.AddTransient<IPostService,PostService>();    
-                services.AddTransient<IPostRepository,PostRepository>();    
-                services.AddTransient<IUserRepository,UserRepository>();    
+                // services.AddTransient<IPostRepository,PostRepository>();    
+                // services.AddTransient<IUserRepository,UserRepository>();
+
+                //Generic Repository
+                services.AddScoped(typeof(IRepository<>),typeof(BaseRepository<>));    
+                services.AddTransient<IUnitOfWork,UnitOfWork>();    
             #endregion
 
 
