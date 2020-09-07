@@ -39,7 +39,9 @@ namespace SocialMedia.Api
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             //Ignore Reference Circular
-            services.AddControllers()
+            services.AddControllers(options => {
+                    options.Filters.Add<GlobalExceptionFilter>();
+                })
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
