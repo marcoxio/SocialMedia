@@ -6,6 +6,7 @@ using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.Services;
 using SocialMedia.Infrastructure.Data;
 using SocialMedia.Infrastructure.Filters;
+using SocialMedia.Infrastructure.Interfaces;
 using SocialMedia.Infrastructure.Repositories;
+using SocialMedia.Infrastructure.Services;
 
 namespace SocialMedia.Api
 {
@@ -45,6 +49,7 @@ namespace SocialMedia.Api
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                 })
 
                 // //Not valid model ApiController
@@ -57,6 +62,8 @@ namespace SocialMedia.Api
                     options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
                 });
 
+                // Variable Pagination
+                services.Configure<PaginationOptions>(Configuration.GetSection("Pagination"));
             #region ConnectionDb
                 services.AddDbContext<SocialMediaContext>(opt => {
                     opt.UseSqlServer(Configuration.GetConnectionString("SocialMedia"));
@@ -70,7 +77,14 @@ namespace SocialMedia.Api
 
                 //Generic Repository
                 services.AddScoped(typeof(IRepository<>),typeof(BaseRepository<>));    
-                services.AddTransient<IUnitOfWork,UnitOfWork>();    
+                services.AddTransient<IUnitOfWork,UnitOfWork>();
+                services.AddSingleton<IUriService>(provider => 
+                {
+                    var accesor = provider.GetRequiredService<IHttpContextAccessor>();
+                    var request = accesor.HttpContext.Request;
+                    var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                    return new UriService(absoluteUri);
+                });    
             #endregion
 
 

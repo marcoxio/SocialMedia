@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Exceptions;
@@ -14,12 +15,14 @@ namespace SocialMedia.Core.Services
     public class PostService : IPostService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public PostService(IUnitOfWork unitOfWork)
+        private readonly PaginationOptions _paginationOptions;
+        public PostService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
         {
+            _paginationOptions = options.Value;
             _unitOfWork = unitOfWork;
         }
 
-      
+
 
         public async Task<Post> GetPost(int id)
         {
@@ -28,6 +31,9 @@ namespace SocialMedia.Core.Services
 
         public PagedList<Post> GetPosts(PostQueryFilter filters)
         {
+            filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
+            filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
+
             var posts = _unitOfWork.PostRepository.GetAll();
 
             if (filters.UserId != null)
@@ -52,7 +58,7 @@ namespace SocialMedia.Core.Services
         {
 
             var user = await _unitOfWork.UserRepository.GetById(post.UserId);
-             if (user == null)
+            if (user == null)
             {
                 throw new BusinessException("User doesn't exist");
             }
@@ -60,15 +66,15 @@ namespace SocialMedia.Core.Services
             var userPost = await _unitOfWork.PostRepository.GetPostsByUser(post.UserId);
             if (userPost.Count() < 10)
             {
-                var lastPost = userPost.OrderByDescending(x=> x.Date).FirstOrDefault();
-                  if ((DateTime.Now - lastPost.Date).TotalDays < 7)
+                var lastPost = userPost.OrderByDescending(x => x.Date).FirstOrDefault();
+                if ((DateTime.Now - lastPost.Date).TotalDays < 7)
                 {
                     throw new BusinessException("You are not able to publish the post");
                 }
-            }   
+            }
 
             bool contains = Regex.IsMatch(post.Description, @"\bSexo\b", RegexOptions.IgnoreCase);
-             if (contains)
+            if (contains)
             {
                 throw new BusinessException("Content not allowed");
             }
@@ -78,12 +84,12 @@ namespace SocialMedia.Core.Services
 
         public async Task<bool> UpdatePost(Post post)
         {
-             _unitOfWork.PostRepository.Update(post);
-             await _unitOfWork.SaveChangesAsync();
+            _unitOfWork.PostRepository.Update(post);
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
 
-          public async Task<bool> DeletePost(int id)
+        public async Task<bool> DeletePost(int id)
         {
             await _unitOfWork.PostRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();

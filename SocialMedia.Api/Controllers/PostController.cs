@@ -12,6 +12,7 @@ using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Infrastructure.Repositories;
+using SocialMedia.Infrastructure.Interfaces;
 
 namespace SocialMedia.Api.Controllers
 {
@@ -21,20 +22,21 @@ namespace SocialMedia.Api.Controllers
     {
         private readonly IPostService _postService;
         private readonly IMapper _mapper;
+        private readonly IUriService _uriService;
 
-        public PostController(IPostService postService, IMapper mapper)
+        public PostController(IPostService postService, IMapper mapper, IUriService uriService)
         {
+            _uriService = uriService;
             _mapper = mapper;
             _postService = postService;
         }
-        [HttpGet]
+        [HttpGet(Name = nameof(GetPosts))]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult GetPosts([FromQuery] PostQueryFilter filters)
         {
-            var posts =  _postService.GetPosts(filters);
-            var postsDto = _mapper.Map<IEnumerable<PostDto>>(posts);
-            var response = new ApiResponse<IEnumerable<PostDto>>(postsDto);
+            var posts = _postService.GetPosts(filters);
+            var postsDtos = _mapper.Map<IEnumerable<PostDto>>(posts);
             // var postsDto = posts.Select(x => new PostDto
             // {
             //     PostId = x.PostId,
@@ -43,14 +45,21 @@ namespace SocialMedia.Api.Controllers
             //     Image = x.Image,
             //     UserId = x.UserId
             // });
-          var metadata = new
+            var metadata = new Metadata
             {
-                posts.TotalCount,
-                posts.PageSize,
-                posts.CurrentPage,
-                posts.TotalPages,
-                posts.HasNextPage,
-                posts.HasPreviousPage
+                TotalCount = posts.TotalCount,
+                PageSize = posts.PageSize,
+                CurrentPage = posts.CurrentPage,
+                TotalPages = posts.TotalPages,
+                HasNextPage = posts.HasNextPage,
+                HasPreviousPage = posts.HasPreviousPage,
+                NextPageUrl = _uriService.GetPostPaginationUri(filters, Url.RouteUrl(nameof(GetPosts))).ToString(),
+                PreviousPageUrl = _uriService.GetPostPaginationUri(filters, Url.RouteUrl(nameof(GetPosts))).ToString()
+            };
+
+            var response = new ApiResponse<IEnumerable<PostDto>>(postsDtos)
+            {
+                Meta = metadata
             };
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
             return Ok(response);
@@ -94,22 +103,22 @@ namespace SocialMedia.Api.Controllers
 
 
         [HttpPut]
-          public async Task<IActionResult> EditPost(int id, PostDto postDto)
+        public async Task<IActionResult> EditPost(int id, PostDto postDto)
         {
 
             var post = _mapper.Map<Post>(postDto);
             post.Id = id;
-        
+
             var result = await _postService.UpdatePost(post);
             var response = new ApiResponse<bool>(result);
             return Ok(response);
 
         }
 
-          [HttpDelete("{id}")]
-          public async Task<IActionResult> DeletePost(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePost(int id)
         {
-            
+
             var result = await _postService.DeletePost(id);
             var response = new ApiResponse<bool>(result);
             return Ok(response);
