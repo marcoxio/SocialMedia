@@ -13,9 +13,11 @@ using SocialMedia.Core.QueryFilters;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Infrastructure.Repositories;
 using SocialMedia.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SocialMedia.Api.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -32,10 +34,14 @@ namespace SocialMedia.Api.Controllers
             _postService = postService;
         }
 
-         /// <summary>
+        /// <summary>
         /// Retrieve all posts
         /// </summary>
+        /// <returns>List of Post</returns>
         /// <param name="filters">Filters to apply</param>
+        /// <remarks>Informacion This section see information posts</remarks>
+        /// <response code="200">Success</response>
+        /// <response code="400">BadRequest</response>
         /// <returns></returns>
         [HttpGet(Name = nameof(GetPosts))]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<PostDto>>))]
